@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funny Sound Buttons</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .sound-button {
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sound-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .sound-button:hover::before {
+            left: 100%;
+        }
+
+        .sound-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .sound-button:active {
+            transform: translateY(-1px) scale(0.98);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .elephant-button {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+
+        .goofy-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+
+        .pota-button {
+            background: linear-gradient(45deg, #a8e6cf, #7fcdcd);
+        }
+
+        .emoji {
+            font-size: 2em;
+            margin-right: 10px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .sound-button:hover .emoji {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .description {
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .volume-control {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .volume-slider {
+            width: 200px;
+            height: 5px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .volume-slider:hover {
+            opacity: 1;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        .keyboard-hint {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #888;
+            font-style: italic;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+            }
+        }
+
+        .playing {
+            animation: pulse 1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔊 Sound Button Fun!</h1>
+        
+        <div class="volume-control">
+            <span>🔉</span>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.1" value="0.7">
+            <span>🔊</span>
+        </div>
+        
+        <div class="button-container">
+            <button class="sound-button elephant-button" onclick="playSound('elephant')">
+                <span class="emoji">🐘</span>
+                Elephant Sound
+            </button>
+            
+            <button class="sound-button goofy-button" onclick="playSound('goofy')">
+                <span class="emoji">😜</span>
+                Goofy Sound
+            </button>
+            
+            <button class="sound-button pota-button" onclick="playSound('pota')">
+                <span class="emoji">🥔</span>
+                Pota Sound
+            </button>
+        </div>
+
+        <div class="description">
+            <p>Click the buttons to hear instant sound effects!</p>
+            <div class="keyboard-hint">
+                Keyboard shortcuts: 1 = Elephant, 2 = Goofy, 3 = Pota
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio elements for each sound -->
+    <audio id="elephant-audio" preload="auto">
+        <source src="/sounds/elephant.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <audio id="goofy-audio" preload="auto">
+        <source src="/sounds/goofy.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <audio id="pota-audio" preload="auto">
+        <source src="/sounds/pota.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Get all audio elements
+        const audioElements = {
+            elephant: document.getElementById('elephant-audio'),
+            goofy: document.getElementById('goofy-audio'),
+            pota: document.getElementById('pota-audio')
+        };
+
+        // Volume control
+        const volumeSlider = document.getElementById('volumeSlider');
+        
+        // Set initial volume for all audio elements
+        Object.values(audioElements).forEach(audio => {
+            audio.volume = volumeSlider.value;
+        });
+
+        // Update volume when slider changes
+        volumeSlider.addEventListener('input', function() {
+            Object.values(audioElements).forEach(audio => {
+                audio.volume = this.value;
+            });
+        });
+
+        function playSound(soundName) {
+            const audio = audioElements[soundName];
+            const button = event.target.closest('.sound-button');
+            
+            if (audio) {
+                // Stop any currently playing audio
+                Object.values(audioElements).forEach(a => {
+                    a.pause();
+                    a.currentTime = 0;
+                });
+
+                // Remove playing class from all buttons
+                document.querySelectorAll('.sound-button').forEach(btn => {
+                    btn.classList.remove('playing');
+                });
+
+                // Add playing animation to current button
+                button.classList.add('playing');
+                
+                // Play the audio
+                audio.currentTime = 0; // Reset to beginning
+                audio.play().catch(error => {
+                    console.error('Error playing audio:', error);
+                    alert('Could not play audio. Make sure the sound files are in the /sounds directory.');
+                });
+
+                // Remove playing animation when audio ends
+                audio.addEventListener('ended', function() {
+                    button.classList.remove('playing');
+                }, { once: true });
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            switch(event.key) {
+                case '1':
+                    playSound('elephant');
+                    break;
+                case '2':
+                    playSound('goofy');
+                    break;
+                case '3':
+                    playSound('pota');
+                    break;
+            }
+        });
+
+        // Enhanced button interactions
+        document.querySelectorAll('.sound-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('playing')) {
+                    this.style.transform = '';
+                }
+            });
+        });
+
+        // Error handling for audio loading
+        Object.entries(audioElements).forEach(([name, audio]) => {
+            audio.addEventListener('error', function() {
+                console.error(`Error loading ${name}.mp3`);
+            });
+        });
+    </script>
+</body>
+</html>
